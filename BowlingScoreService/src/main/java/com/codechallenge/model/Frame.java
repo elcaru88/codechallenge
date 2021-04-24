@@ -40,20 +40,20 @@ public class Frame {
 
     public Integer getScore() {
         if(isLast()) {
-            return pinThrows.stream().reduce(0, Integer::sum);
+            return getAllPinThrows();
         }
         if(isStrike()) {
             if (this.nextFrame.isLast()) {
-                return 10 + this.nextFrame.getPinThrows().get(0) + this.nextFrame.getPinThrows().get(1);
+                return TOTAL_PINS + this.nextFrame.getPinThrows().get(0) + this.nextFrame.getPinThrows().get(1);
             } else if (this.nextFrame.isStrike()) {
-                return 10 + 10 + this.nextFrame.nextFrame.getPinThrows().peekFirst();
+                return TOTAL_PINS + TOTAL_PINS + this.nextFrame.nextFrame.getPinThrows().peekFirst();
             } else {
-                return 10 + this.nextFrame.getAllPinThrows();
+                return TOTAL_PINS + this.nextFrame.getAllPinThrows();
             }
         } else if (isSpare()){
-            return 10 + this.nextFrame.getPinThrows().peekFirst();
+            return TOTAL_PINS + this.nextFrame.getPinThrows().peekFirst();
         }
-        return pinThrows.stream().reduce(0, Integer::sum);
+        return getAllPinThrows();
     }
 
     public boolean isStrike() {
