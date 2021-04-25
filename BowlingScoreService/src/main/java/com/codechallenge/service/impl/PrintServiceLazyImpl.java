@@ -7,8 +7,12 @@ import com.codechallenge.builder.impl.PlayerFramesBuilderImpl;
 import com.codechallenge.model.Board;
 import com.codechallenge.model.Frame;
 import com.codechallenge.model.Player;
+import com.codechallenge.service.InputService;
 import com.codechallenge.service.OutputService;
 
+/**
+ * Lazy implementation of the {@link OutputService} to populate the Board with the result scores at the request for print
+ */
 public class PrintServiceLazyImpl implements OutputService {
 
     PlayerFramesBuilder playerFramesBuilder = new PlayerFramesBuilderImpl();
@@ -16,14 +20,17 @@ public class PrintServiceLazyImpl implements OutputService {
 
     @Override
     public String printBoard(Board board){
+        this.fillBoard(board);
         StringBuilder boardString = new StringBuilder();
         appendToBoardFrameTitle(boardString);
         board.getPlayers().forEach( player -> appendToBoardSinglePlayer(boardString, player));
         return boardString.toString();
     }
 
-    @Override
     public Board fillBoard(Board board) {
+        if(board.getPlayers().stream().anyMatch(player -> !player.getFrames().isEmpty())) {
+            return board;
+        }
         board.getPlayers().forEach( player -> playerFramesBuilder.buildFrames(player));
         return board;
     }

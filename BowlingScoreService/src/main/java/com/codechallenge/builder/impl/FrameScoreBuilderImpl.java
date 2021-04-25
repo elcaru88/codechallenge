@@ -3,7 +3,8 @@ package com.codechallenge.builder.impl;
 import com.codechallenge.builder.FrameScoreBuilder;
 import com.codechallenge.model.Frame;
 
-import static com.codechallenge.model.Frame.TOTAL_PINS;
+import static com.codechallenge.builder.impl.PlayerFramesBuilderImpl.TOTAL_PINS;
+
 
 /**
  * Implementation of {@link FrameScoreBuilder} to calculate the score of a frame considering the traditional scoring

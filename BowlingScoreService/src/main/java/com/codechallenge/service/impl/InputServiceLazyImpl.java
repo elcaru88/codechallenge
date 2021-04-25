@@ -7,6 +7,10 @@ import com.codechallenge.service.InputService;
 
 import java.util.List;
 
+/**
+ * Lazy implementation of the {@link InputService} to add the throws done on the game. The score is not calculated at
+ * this moment
+ */
 public class InputServiceLazyImpl implements InputService {
 
     private Board board = new Board();
@@ -22,6 +26,10 @@ public class InputServiceLazyImpl implements InputService {
         player.addSingleThrow(singleThrow.getFallPins());
     }
 
+    /**
+     * Returns the board with all throws of the players previously added without computing the scores
+     * @return instance of {@link Board} with the throws done on the match ready to calculate the scores
+     */
     public Board getBoard() {
         return board;
     }

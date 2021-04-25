@@ -4,11 +4,11 @@ import java.util.LinkedList;
 
 public class Frame {
 
-    public final static Integer TOTAL_PINS = 10;
-
     private LinkedList<Integer> pinThrows = new LinkedList();
     private boolean isLast = false;
     private boolean isClosed = false;
+    private boolean isStrike = false;
+    private boolean isSpare = false;
     private Frame nextFrame;
 
     public Frame getNextFrame() {
@@ -20,7 +20,7 @@ public class Frame {
     }
 
     public LinkedList<Integer> getPinThrows() {
-        return pinThrows;
+        return this.pinThrows;
     }
 
     public void addPinThrows(Integer pinThrows) {
@@ -28,19 +28,27 @@ public class Frame {
     }
 
     public boolean isLast() {
-        return isLast;
+        return this.isLast;
     }
 
     public void setAsLast() {
-        isLast = true;
+        this.isLast = true;
+    }
+
+    public void setAsStrike() {
+        this.isStrike = true;
     }
 
     public boolean isStrike() {
-        return pinThrows.peekFirst() == TOTAL_PINS;
+        return this.isStrike;
+    }
+
+    public void setAsSpare() {
+        this.isSpare = true;
     }
 
     public boolean isSpare() {
-        return pinThrows.size() == 2 && getAllPinThrows().equals(TOTAL_PINS);
+        return this.isSpare;
     }
 
     public void close() {

@@ -48,7 +48,6 @@ public class ReadGameFileServiceImpl implements ReadGameFileService {
 
     @Override
     public void printResult(Board board) {
-        outputService.fillBoard(board);
         System.out.print(outputService.printBoard(board));
     }
 }
