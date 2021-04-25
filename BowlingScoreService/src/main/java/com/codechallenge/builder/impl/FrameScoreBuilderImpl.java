@@ -15,6 +15,7 @@ import static com.codechallenge.builder.impl.PlayerFramesBuilderImpl.TOTAL_PINS;
 public class FrameScoreBuilderImpl implements FrameScoreBuilder {
 
     public Integer getScore(Frame frame) {
+        //TODO: fail if a frame has a throw with more than TOTAL_PINS on one try
         if(frame.isLast()) {
             return frame.getAllPinThrows();
         }

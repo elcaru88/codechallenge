@@ -60,7 +60,7 @@ public class Frame {
     }
 
     public Integer getAllPinThrows() {
-        return this.pinThrows.stream().reduce(0, Integer::sum);
+        return this.getPinThrows().stream().reduce(0, Integer::sum);
     }
 
     public Integer getSingleThrowPins(int index) {

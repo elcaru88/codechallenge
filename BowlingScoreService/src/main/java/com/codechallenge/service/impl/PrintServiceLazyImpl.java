@@ -56,7 +56,10 @@ public class PrintServiceLazyImpl implements OutputService {
 
     private Integer appendToBoardScore(StringBuilder boardString, Frame frame, Integer acumScore) {
         Integer currentScore = acumScore + frameScoreBuilder.getScore(frame);
-        boardString.append(currentScore + "\t\t");
+        boardString.append(currentScore);
+        if (!frame.isLast()) {
+            boardString.append("\t\t");
+        }
         return currentScore;
     }
 
@@ -64,15 +67,27 @@ public class PrintServiceLazyImpl implements OutputService {
         if (frame.isLast()) {
             if (frame.isStrike()) {
                 boardString.append("\tX\t");
-                boardString.append(frame.getPinThrows().get(1) + "\t");
-                boardString.append(frame.getPinThrows().get(2));
+                String printablePinThrows;
+                printablePinThrows = frame.getPinThrows().get(1) == 10 ? "X" : frame.getPinThrows().get(1).toString();
+                boardString.append(printablePinThrows + "\t");
+                printablePinThrows = frame.getPinThrows().get(2) == 10 ? "X" : frame.getPinThrows().get(2).toString();
+                boardString.append(printablePinThrows);
             } else if (frame.isSpare()) {
                 boardString.append(frame.getPinThrows().get(0) + "\t");
                 boardString.append("/\t");
                 boardString.append(frame.getPinThrows().get(2));
             } else {
-                boardString.append(frame.getPinThrows().get(0) + "\t");
-                boardString.append(frame.getPinThrows().get(1));
+                if (frame.getPinThrows().get(0) == 0) {
+                    boardString.append("F" + "\t");
+                    if (frame.getPinThrows().get(1) == 0) {
+                        boardString.append("F");
+                    } else {
+                        boardString.append(frame.getPinThrows().get(1));
+                    }
+                } else {
+                    boardString.append(frame.getPinThrows().get(0) + "\t");
+                    boardString.append(frame.getPinThrows().get(1));
+                }
             }
         } else if (frame.isStrike()) {
             boardString.append("\tX\t");
@@ -80,8 +95,17 @@ public class PrintServiceLazyImpl implements OutputService {
             boardString.append(frame.getPinThrows().get(0) + "\t");
             boardString.append("/\t");
         } else {
-            boardString.append(frame.getPinThrows().get(0) + "\t");
-            boardString.append(frame.getPinThrows().get(1) + "\t");
+            if (frame.getPinThrows().get(0) == 0) {
+                boardString.append("F" + "\t");
+                if (frame.getPinThrows().get(1) == 0) {
+                    boardString.append("F" + "\t");
+                } else {
+                    boardString.append(frame.getPinThrows().get(1));
+                }
+            } else {
+                boardString.append(frame.getPinThrows().get(0) + "\t");
+                boardString.append(frame.getPinThrows().get(1) + "\t");
+            }
         }
     }
 
