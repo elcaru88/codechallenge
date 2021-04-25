@@ -1,6 +1,6 @@
 package com.codechallenge.service;
 
-import com.codechallenge.model.SingleThrow;
+import com.codechallenge.request.SingleThrow;
 
 import java.util.List;
 

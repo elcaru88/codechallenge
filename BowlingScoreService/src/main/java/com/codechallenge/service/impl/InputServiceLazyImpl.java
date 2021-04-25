@@ -2,12 +2,12 @@ package com.codechallenge.service.impl;
 
 import com.codechallenge.model.Board;
 import com.codechallenge.model.Player;
-import com.codechallenge.model.SingleThrow;
+import com.codechallenge.request.SingleThrow;
 import com.codechallenge.service.InputService;
 
 import java.util.List;
 
-public class InputServiceImpl implements InputService {
+public class InputServiceLazyImpl implements InputService {
 
     private Board board = new Board();
 

@@ -1,4 +1,4 @@
-package com.codechallenge.model;
+package com.codechallenge.request;
 
 public class SingleThrow {
 

@@ -1,11 +1,18 @@
 package com.codechallenge.service.impl;
 
+import com.codechallenge.builder.FrameScoreBuilder;
+import com.codechallenge.builder.PlayerFramesBuilder;
+import com.codechallenge.builder.impl.FrameScoreBuilderImpl;
+import com.codechallenge.builder.impl.PlayerFramesBuilderImpl;
 import com.codechallenge.model.Board;
 import com.codechallenge.model.Frame;
 import com.codechallenge.model.Player;
 import com.codechallenge.service.PrintService;
 
-public class PrintServiceImpl implements PrintService {
+public class PrintServiceLazyImpl implements PrintService {
+
+    PlayerFramesBuilder playerFramesBuilder = new PlayerFramesBuilderImpl();
+    FrameScoreBuilder frameScoreBuilder = new FrameScoreBuilderImpl();
 
     @Override
     public String printBoard(Board board){
@@ -21,7 +28,7 @@ public class PrintServiceImpl implements PrintService {
     }
 
     private void appendToBoardSinglePlayer(StringBuilder boardString, Player player) {
-        player.buildFrames();
+        playerFramesBuilder.buildFrames(player);
         boardString.append(player.getName());
         boardString.append(System.getProperty("line.separator"));
         boardString.append("Pinfalls\t");
@@ -36,7 +43,7 @@ public class PrintServiceImpl implements PrintService {
     }
 
     private Integer appendToBoardScore(StringBuilder boardString, Frame frame, Integer acumScore) {
-        Integer currentScore = acumScore + frame.getScore();
+        Integer currentScore = acumScore + frameScoreBuilder.getScore(frame);
         boardString.append(currentScore + "\t\t");
         return currentScore;
     }
