@@ -100,7 +100,7 @@ public class PrintServiceLazyImpl implements OutputService {
                 if (frame.getPinThrows().get(1) == 0) {
                     boardString.append("F" + "\t");
                 } else {
-                    boardString.append(frame.getPinThrows().get(1));
+                    boardString.append(frame.getPinThrows().get(1) + "\t");
                 }
             } else {
                 boardString.append(frame.getPinThrows().get(0) + "\t");

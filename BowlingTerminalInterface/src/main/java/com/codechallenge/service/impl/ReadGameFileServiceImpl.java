@@ -18,6 +18,7 @@ public class ReadGameFileServiceImpl implements ReadGameFileService {
 
     @Override
     public Board readFile(String fileName) {
+        //TODO: add more validations for the entries if needed
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(fileName));

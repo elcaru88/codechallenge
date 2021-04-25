@@ -16,6 +16,7 @@ public class PlayerFramesBuilderImpl implements PlayerFramesBuilder {
     public final static Integer TOTAL_PINS = 10;
 
     public void buildFrames(Player player) {
+        //TODO: add more validations for the frames if needed
         Frame currentFrame = new Frame();
         player.getFrames().push(currentFrame);
         LinkedList<Integer> allThrows = player.getAllThrows();
@@ -42,8 +43,12 @@ public class PlayerFramesBuilderImpl implements PlayerFramesBuilder {
         if (frame.isClosed()) {
             throw new IllegalStateException("Trying to add a throw to a closed frame");
         }
+        if (pinsFall > TOTAL_PINS) {
+            throw new IllegalStateException("Invalid input; Can't throw more than TOTAL_PINS: " + TOTAL_PINS);
+        }
         frame.addPinThrows(pinsFall);
         int pinThrowsSize = frame.getPinThrows().size();
+        //TODO: improve the if waterfall
         if (pinThrowsSize == 1 && pinsFall == TOTAL_PINS){
             frame.setAsStrike();
         }
