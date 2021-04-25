@@ -22,15 +22,11 @@ public class InputServiceLazyImpl implements InputService {
         player.addSingleThrow(singleThrow.getFallPins());
     }
 
-    public void addSingleThrow(String playerName, Integer pinFalls) {
-        this.addSingleThrowToBoard(new SingleThrow(playerName, pinFalls));
-    }
-
     public Board getBoard() {
         return board;
     }
 
-
     public void entireGameInput(List<SingleThrow> allThrows) {
+        allThrows.forEach(singleThrow -> addSingleThrowToBoard(singleThrow));
     }
 }
