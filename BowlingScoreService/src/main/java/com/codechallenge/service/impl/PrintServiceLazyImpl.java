@@ -7,9 +7,9 @@ import com.codechallenge.builder.impl.PlayerFramesBuilderImpl;
 import com.codechallenge.model.Board;
 import com.codechallenge.model.Frame;
 import com.codechallenge.model.Player;
-import com.codechallenge.service.PrintService;
+import com.codechallenge.service.OutputService;
 
-public class PrintServiceLazyImpl implements PrintService {
+public class PrintServiceLazyImpl implements OutputService {
 
     PlayerFramesBuilder playerFramesBuilder = new PlayerFramesBuilderImpl();
     FrameScoreBuilder frameScoreBuilder = new FrameScoreBuilderImpl();
@@ -22,13 +22,18 @@ public class PrintServiceLazyImpl implements PrintService {
         return boardString.toString();
     }
 
+    @Override
+    public Board fillBoard(Board board) {
+        board.getPlayers().forEach( player -> playerFramesBuilder.buildFrames(player));
+        return board;
+    }
+
     private void appendToBoardFrameTitle(StringBuilder boardString) {
         boardString.append("Frame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10");
         boardString.append(System.getProperty("line.separator"));
     }
 
     private void appendToBoardSinglePlayer(StringBuilder boardString, Player player) {
-        playerFramesBuilder.buildFrames(player);
         boardString.append(player.getName());
         boardString.append(System.getProperty("line.separator"));
         boardString.append("Pinfalls\t");

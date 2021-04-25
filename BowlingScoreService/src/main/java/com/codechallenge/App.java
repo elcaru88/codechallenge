@@ -1,6 +1,7 @@
 package com.codechallenge;
 
 import com.codechallenge.model.Board;
+import com.codechallenge.service.OutputService;
 import com.codechallenge.service.impl.InputServiceLazyImpl;
 import com.codechallenge.service.impl.PrintServiceLazyImpl;
 
@@ -41,7 +42,8 @@ public class App {
         inputService.addSingleThrow("John", 10);
         inputService.addSingleThrow("John", 10);
         Board board = inputService.getBoard();
-        PrintServiceLazyImpl printService = new PrintServiceLazyImpl();
-        System.out.print(printService.printBoard(board));
+        OutputService outputService = new PrintServiceLazyImpl();
+        outputService.fillBoard(board);
+        System.out.print(outputService.printBoard(board));
     }
 }
